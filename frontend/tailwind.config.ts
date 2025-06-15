@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -11,7 +12,11 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        bgmain : '#FBF9F7'
       },
+      fontFamily : {
+        DM_Sans : 'var(--font_DM_Sans)'
+      }
     },
   },
   plugins: [],

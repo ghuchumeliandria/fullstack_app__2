@@ -2,17 +2,27 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "./components/__organisms/navbar/Navbar";
+import Footer from "./components/__organisms/footer/Footer";
+import { DM_Sans } from 'next/font/google'
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
 });
+const DMS = DM_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font_DM_Sans',
+});
+
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,12 +37,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${DMS.variable} antialiased`}
       >
-        <div className="w-full bg-bgmain pt-5 pb-8 min-h-[100vh]">
-          <Navbar />
+        <div className="w-full bg-bgmain pt-5  min-h-[100vh]">
+          <div className="w-full max-w-[640px] mx-auto">
 
-          {children}
+            <Navbar />
+
+            {children}
+            <Footer />
+          </div>
         </div>
       </body>
     </html>
