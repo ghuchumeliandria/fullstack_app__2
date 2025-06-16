@@ -12,7 +12,8 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        bgmain : '#FBF9F7'
+        bgmain : '#FBF9F7',
+        borderColor : 'EFEDEB'
       },
       fontFamily : {
         DM_Sans : 'var(--font_DM_Sans)'
