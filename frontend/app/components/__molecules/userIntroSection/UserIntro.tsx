@@ -2,7 +2,7 @@ import Image from 'next/image'
 import X from '../../../images/X.svg'
 import gitSvg from '../../../images/git.svg'
 import Smile from '../../../images/smile.svg'
-import linkedin from '../../../images/Linkedin.svg'
+import linkedin from '../../../images/linkedin.svg'
 export default function UserIntro() {
 
 
