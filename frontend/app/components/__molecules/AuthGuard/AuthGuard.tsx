@@ -27,7 +27,7 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const isAuthPage = ["/login", "/register"].includes(pathname);
 
   return (
-    <div className="w-full bg-bgmain min-h-[100vh]">
+    <div className="w-full bg-bgmain min-h-[100vh] pt-5">
       <div className="w-full mx-auto">
         {!isAuthPage && <Navbar />}
         {children}

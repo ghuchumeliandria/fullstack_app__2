@@ -16,34 +16,38 @@ export default function AboutContent() {
   };
 
   return (
-    <div className="space-y-4">
-      <h1 className="text-3xl font-bold">About Me</h1>
-      {edit ? (
-        <>
-          <textarea
-            value={about}
-            onChange={(e) => setAbout(e.target.value)}
-            className="w-full p-2 border rounded text-black"
-            rows={8}
-          />
-          <button
-            onClick={handleSave}
-            className="bg-green-600 text-white px-4 py-1 rounded"
-          >
-            Save
-          </button>
-        </>
-      ) : (
-        <>
-          <p className="whitespace-pre-line">{about || "No about text yet."}</p>
-          <button
-            onClick={() => setEdit(true)}
-            className="bg-blue-500 text-white px-4 py-1 rounded"
-          >
-            Edit
-          </button>
-        </>
-      )}
+    <div className="space-y-4 ">
+      <div className="w-full min-h-[84vh] px-2.5 border-[1px] flex justify-center items-center flex-col border-y-0 border-borderColor ">
+        <h1 className="text-3xl font-bold flex items-end gap-2">About Me <div className="w-10 h-[3px] mb-1x bg-[#93CEFC]"></div></h1>
+
+        {edit ? (
+          <>
+            <textarea
+              value={about}
+              onChange={(e) => setAbout(e.target.value)}
+              className="w-full p-2 border rounded text-black"
+              rows={8}
+            />
+
+            <button
+              onClick={handleSave}
+              className="bg-green-600 text-white w-[100px] mx-auto mt-2 px-4 py-1 rounded"
+            >
+              Save
+            </button>
+          </>
+        ) : (
+          <>
+            <p className="whitespace-pre-line">{about || "No about text yet."}</p>
+            <button
+              onClick={() => setEdit(true)}
+              className="bg-blue-500 text-white w-[100px] mx-auto mt-2 px-4 py-1 rounded"
+            >
+              Edit
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
 }

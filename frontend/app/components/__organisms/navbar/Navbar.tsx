@@ -7,13 +7,13 @@ export default function Navbar() {
   const { user } = useUserStore();
 
   return (
-    <div className="w-full max-w-[640px] mx-auto bg-[#FEFEFE] p-[7px]  rounded-[10px] border-[1px] border-[#EFEDEB] flex justify-between">
+    <div className="w-full max-w-[640px] mx-auto bg-[#FEFEFE] p-[7px] rounded-[10px] border-[1px] border-[#EFEDEB] flex justify-between">
       {user?.image && (
         <Image
           src={user.image}
           alt="profile"
-          width={64}
-          height={64}
+          width={40}
+          height={40}
           className="rounded-[10px]"
         />
       )}
