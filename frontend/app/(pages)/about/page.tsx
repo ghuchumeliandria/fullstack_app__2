@@ -1,9 +1,9 @@
-import React from 'react'
+import AboutContent from "@/app/components/__organisms/AboutContent/AboutContent";
 
 export default function AboutPage() {
   return (
-    <div className='w-full min-h-[90vh] h-full'>
-      
+    <div className="p-6">
+      <AboutContent />
     </div>
   )
 }

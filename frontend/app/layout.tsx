@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "./components/__organisms/navbar/Navbar";
-import Footer from "./components/__organisms/footer/Footer";
-import { DM_Sans } from 'next/font/google'
+import { DM_Sans } from "next/font/google";
+import AuthGuard from "./components/__molecules/AuthGuard/AuthGuard";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -16,13 +15,12 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
+
 const DMS = DM_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font_DM_Sans',
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font_DM_Sans",
 });
-
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -31,23 +29,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${DMS.variable} antialiased`}
       >
-        <div className="w-full bg-bgmain pt-5  min-h-[100vh]">
-          <div className="w-full max-w-[640px] mx-auto">
-
-            <Navbar />
-
-            {children}
-            <Footer />
-          </div>
-        </div>
+        <AuthGuard>{children}</AuthGuard>
       </body>
     </html>
   );
