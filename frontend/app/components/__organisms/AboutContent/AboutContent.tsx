@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import TextLine from "../../__atoms/TextLine/TextLine";
 
 export default function AboutContent() {
   const [about, setAbout] = useState("");
@@ -18,8 +19,7 @@ export default function AboutContent() {
   return (
     <div className="space-y-4 ">
       <div className="w-full min-h-[84vh] px-2.5 border-[1px] flex justify-center items-center flex-col border-y-0 border-borderColor ">
-        <h1 className="text-3xl font-bold flex items-end gap-2">About Me <div className="w-10 h-[3px] mb-1x bg-[#93CEFC]"></div></h1>
-
+        <TextLine text='About Us' />
         {edit ? (
           <>
             <textarea
@@ -38,7 +38,9 @@ export default function AboutContent() {
           </>
         ) : (
           <>
-            <p className="whitespace-pre-line">{about || "No about text yet."}</p>
+            <div className="w-full max-w-[360px] rounded-xl p-4 mx-auto shadow-[0_4px_20px_rgba(0,0,0,0.1)] my-3 bg-white">
+              <p className="whitespace-pre-line">{about || "No about text yet."}</p>
+            </div>
             <button
               onClick={() => setEdit(true)}
               className="bg-blue-500 text-white w-[100px] mx-auto mt-2 px-4 py-1 rounded"

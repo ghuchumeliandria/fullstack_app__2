@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Articles from "../../__atoms/articles/Articles";
 import Link from "next/link";
+import TextLine from "../../__atoms/TextLine/TextLine";
 
 type BlogType = {
   title: string,
@@ -21,7 +22,7 @@ export default function UserArticles() {
   return (
     <div className="w-full mt-12 flex flex-col gap-8 pb-12 ">
       <h1 className="text-[32px] font-extrabold font-DM_Sans text-[#34302D]">
-        Latest Articles
+        <TextLine text='Latest Articles' />
       </h1>
       <div className="flex flex-col gap-6">
         {blogPosts.length === 0 ? <h1>No Articles </h1> :

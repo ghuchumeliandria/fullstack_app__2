@@ -35,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${DMS.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${DMS.variable} antialiased bg-bgmain`}
       >
         <AuthGuard>{children}</AuthGuard>
       </body>

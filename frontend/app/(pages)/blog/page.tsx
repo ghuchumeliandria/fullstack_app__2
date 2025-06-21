@@ -1,4 +1,4 @@
-import BlogEditor from '@/app/components/__organisms/BlogEditor/BlogEditor'
+import BlogEditor from '@/app/components/__organisms/AddBlog/AddBlog'
 import React from 'react'
 
 export default function BlogPage() {

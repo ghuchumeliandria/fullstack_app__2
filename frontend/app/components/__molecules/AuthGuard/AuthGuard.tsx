@@ -17,18 +17,21 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (!loaded) return; 
+    if (!loaded) return;
     const publicPaths = ["/login", "/register"];
     if (!user && !publicPaths.includes(pathname)) {
       router.push("/login");
+    }
+    if(loaded && publicPaths.includes(pathname)){
+      return
     }
   }, [loaded, user, pathname]);
 
   const isAuthPage = ["/login", "/register"].includes(pathname);
 
   return (
-    <div className="w-full bg-bgmain min-h-[100vh] pt-5">
-      <div className="w-full mx-auto">
+    <div className="w-full min-h-screen  ">
+      <div className="w-full mx-auto bg-bgmain">
         {!isAuthPage && <Navbar />}
         {children}
         {!isAuthPage && <Footer />}
