@@ -7,25 +7,18 @@ export default function AddBlog() {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [date, setDate] = useState("");
-  const [id, setId] = useState()
 
   useEffect(() => {
     const saved = localStorage.getItem("posts");
-    handleAdd()
     if (saved) {
       const parsedPosts = JSON.parse(saved);
       setPosts(parsedPosts);
-
-      if (parsedPosts.length > 0) {
-        const lastId = parsedPosts[parsedPosts.length - 1]?.id || 0;
-        setId(lastId);
-      }
     }
   }, []);
 
   const handleAdd = () => {
 
-    const newPost = { title, summary, date: date || new Date().toDateString(), id: new Date() };
+    const newPost = { title, summary, date: date || new Date().toDateString(), id: new Date().getTime() };
     const updated = [...posts, newPost];
     setPosts(updated);
     localStorage.setItem("posts", JSON.stringify(updated));

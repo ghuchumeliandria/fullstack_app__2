@@ -3,11 +3,9 @@ import { useEffect, useState } from "react";
 import Articles from "../../__atoms/articles/Articles";
 import Link from "next/link";
 import TextLine from "../../__atoms/TextLine/TextLine";
+import { BlogType } from "@/app/types/type";
 
-type BlogType = {
-  title: string,
-  date: string
-}
+
 export default function UserArticles() {
   const [blogPosts, setBlogPosts] = useState<BlogType[]>([]);
 
@@ -16,8 +14,16 @@ export default function UserArticles() {
     if (stored) {
       const parsed = JSON.parse(stored);
       setBlogPosts(parsed.slice(-5).reverse());
+      console.log(new Date())
     }
   }, []);
+
+  const handleDelete = (id: string) => {
+    console.log('shemovida')
+    const filteredblogs = blogPosts.filter(el => Number(el.id) !== Number(id))
+    localStorage.setItem('posts', JSON.stringify(filteredblogs))
+    setBlogPosts(filteredblogs)
+  }
 
   return (
     <div className="w-full mt-12 flex flex-col gap-8 pb-12 ">
@@ -27,7 +33,7 @@ export default function UserArticles() {
       <div className="flex flex-col gap-6">
         {blogPosts.length === 0 ? <h1>No Articles </h1> :
           blogPosts.map((article, index) => (
-            <Articles title={article.title} date={article.date} key={index} />
+            <Articles title={article.title} date={article.date} id={article.id} handleDelete={handleDelete} key={index} />
           ))
         }
       </div>
