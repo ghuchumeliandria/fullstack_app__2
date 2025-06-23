@@ -11,10 +11,10 @@ export default function Articles({ title, date, id, handleDelete }: Article) {
   return (
     <div className="flex justify-between items-center bg-background text-foreground">
       <div className="flex flex-col gap-2">
-        <h1 className="text-[20px] text-[#34302D] font-semibold font-DM_Sans">
+        <h1 className="text-[20px] text-foreground font-semibold font-DM_Sans">
           {title}
         </h1>
-        <p className="text-[#4A4846] text-[16px] italic font-DM_Sans ">
+        <p className="text-foreground] text-[16px] italic font-DM_Sans ">
           {date}
         </p>
       </div>
