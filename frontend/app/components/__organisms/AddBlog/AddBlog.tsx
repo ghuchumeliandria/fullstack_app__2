@@ -17,8 +17,12 @@ export default function AddBlog() {
   }, []);
 
   const handleAdd = () => {
-
-    const newPost = { title, summary, date: date || new Date().toDateString(), id: new Date().getTime() };
+    const newPost = {
+      title,
+      summary,
+      date: date || new Date().toDateString(),
+      id: new Date().getTime(),
+    };
     const updated = [...posts, newPost];
     setPosts(updated);
     localStorage.setItem("posts", JSON.stringify(updated));
@@ -28,20 +32,19 @@ export default function AddBlog() {
 
   return (
     <div className="space-y-4 w-full max-w-[640px] mx-auto px-[9px]   ">
-      <div className=" w-full border-[1px] border-t-0 border-b-0 min-h-[84vh] pt-8 px-2.5 pb-4 border-borderColor">
-
+      <div className=" w-full border-[1px] border-t-0 border-b-0 min-h-[84vh] pt-8 px-2.5 pb-4 border-borderColor bg-background text-foreground">
         <TextLine text="My Articles" />
         <input
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-2 border rounded text-black my-2"
+          className="w-full p-2 border border-borderColor rounded bg-background text-foreground"
         />
         <textarea
           placeholder="Summary"
           value={summary}
           onChange={(e) => setSummary(e.target.value)}
-          className="w-full p-2 border rounded text-black"
+          className="w-full p-2 border border-borderColor rounded bg-background text-foreground"
         />
         <button
           onClick={handleAdd}
@@ -52,15 +55,20 @@ export default function AddBlog() {
 
         <div className="mt-6 space-y-4">
           <h1>All Articles</h1>
-          {posts.length === 0 ? <h1>No blog posts yet </h1> :
+          {posts.length === 0 ? (
+            <h1>No blog posts yet </h1>
+          ) : (
             posts.map((p, i) => (
-              <div key={i} className="border p-4 rounded bg-white text-black">
+              <div
+                key={i}
+                className="border p-4 rounded bg-background text-foreground border-borderColor"
+              >
                 <h2 className="font-bold">{p.title}</h2>
                 <p className="italic text-sm">{p.date}</p>
                 <p className="break-words max-w-[300px]">{p.summary}</p>
               </div>
             ))
-          }
+          )}
         </div>
       </div>
     </div>
