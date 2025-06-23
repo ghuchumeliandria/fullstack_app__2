@@ -39,6 +39,7 @@ export default function UserArticles() {
             <Articles
               title={article.title}
               date={article.date}
+              summary={article.summary}
               id={article.id}
               handleDelete={handleDelete}
               key={index}

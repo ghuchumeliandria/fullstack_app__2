@@ -38,7 +38,7 @@ export default function AddBlog() {
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-2 border border-borderColor rounded bg-background text-foreground"
+          className="w-full p-2 border border-borderColor rounded bg-background text-foreground my-3"
         />
         <textarea
           placeholder="Summary"
@@ -54,7 +54,7 @@ export default function AddBlog() {
         </button>
 
         <div className="mt-6 space-y-4">
-          <h1>All Articles</h1>
+        <TextLine text="All Articles" />
           {posts.length === 0 ? (
             <h1>No blog posts yet </h1>
           ) : (
