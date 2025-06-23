@@ -31,7 +31,7 @@ export default function Navbar() {
         <div className="md:hidden flex items-center gap-3">
           <ThemeToggle />
           <button onClick={() => setIsOpen(!isOpen)}>
-            <span className="text-2xl text-black">☰</span>
+            <span className="text-2xl font-semibold">☰</span>
           </button>
         </div>
       </div>
