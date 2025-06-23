@@ -18,8 +18,8 @@ export default function AboutContent() {
 
   return (
     <div className="space-y-4 ">
-      <div className="w-full min-h-[84vh] px-2.5 border-[1px] flex justify-center items-center flex-col border-y-0 border-borderColor ">
-        <TextLine text='About Us' />
+      <div className="w-full min-h-[84vh] px-2.5 border-[1px] flex justify-center items-center flex-col border-y-0 border-borderColor bg-background text-foreground">
+        <TextLine text="About Us" />
         {edit ? (
           <>
             <textarea
@@ -38,8 +38,10 @@ export default function AboutContent() {
           </>
         ) : (
           <>
-            <div className="w-full max-w-[360px] rounded-xl p-4 mx-auto shadow-[0_4px_20px_rgba(0,0,0,0.1)] my-3 bg-white">
-              <p className="whitespace-pre-line">{about || "No about text yet."}</p>
+            <div className="max-w-[360px] rounded-xl p-4 mx-auto shadow bg-background border border-borderColor">
+              <p className="whitespace-pre-line">
+                {about || "No about text yet."}
+              </p>
             </div>
             <button
               onClick={() => setEdit(true)}

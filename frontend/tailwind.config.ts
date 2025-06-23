@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -7,19 +6,21 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        bgmain : '#FBF9F7',
-        borderColor : 'EFEDEB'
+        bgmain: "var(--bgmain)",
+        borderColor: "var(--borderColor)",
       },
-      fontFamily : {
-        DM_Sans : 'var(--font_DM_Sans)'
-      }
+      fontFamily: {
+        DM_Sans: "var(--font_DM_Sans)",
+      },
     },
   },
   plugins: [],
 };
+
 export default config;

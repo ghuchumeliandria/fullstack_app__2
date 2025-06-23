@@ -18,7 +18,7 @@ export default function NewsletterForm() {
   };
 
   return (
-    <div className="bg-white p-6 rounded shadow-md w-full max-w-lg mx-auto text-black space-y-5">
+    <div className="bg-background p-6 rounded shadow-md w-full max-w-lg mx-auto text-foreground space-y-5">
       <h1 className="text-3xl font-bold">Newsletter</h1>
       <p>
         Want to stay updated on my latest articles, coding tutorials, and
@@ -41,7 +41,7 @@ export default function NewsletterForm() {
           setMessage("");
         }}
         placeholder="email@example.com"
-        className="w-full px-3 py-2 border rounded bg-white"
+        className="w-full px-3 py-2 border rounded bg-background text-foreground"
       />
       {error && <p className="text-sm text-red-500">{error}</p>}
       {message && <p className="text-sm text-green-600">{message}</p>}
