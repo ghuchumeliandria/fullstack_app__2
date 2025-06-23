@@ -10,7 +10,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="w-full bg-[#FEFEFE] border border-[#EFEDEB] p-4 max-w-[640px] mx-auto rounded-[10px] mt-5">
+    <div className="w-full bg-background border border-[#EFEDEB]  p-4 max-w-[640px] mx-auto rounded-[10px] mt-5">
       <div className="flex justify-between items-center">
         {user?.image && (
           <Image

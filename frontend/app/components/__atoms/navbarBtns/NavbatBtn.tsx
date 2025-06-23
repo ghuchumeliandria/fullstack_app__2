@@ -10,7 +10,7 @@ export default function NavbarBtn({ name }: Name) {
   const pathname = usePathname();
   return (
     <Link href={`/${name.toLowerCase()}`}>
-      <button className="text-[16px] font-normal text-[#4A4846] cursor-pointer relative group ">
+      <button className="text-[16px] font-normal text-foreground cursor-pointer relative group ">
         {name}
         <span
           className={`absolute ${
