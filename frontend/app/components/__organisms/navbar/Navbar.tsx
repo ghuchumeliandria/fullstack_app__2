@@ -12,15 +12,15 @@ export default function Navbar() {
   return (
     <div className="w-full bg-background border border-[#EFEDEB]  p-4 max-w-[640px] mx-auto rounded-[10px] mt-5">
       <div className="flex justify-between items-center">
-        {user?.image && (
+        {user?.image ? (
           <Image
             src={user.image}
             alt="profile"
             width={40}
             height={40}
-            className="rounded-[10px]"
+            className="rounded-[10px] max-[640px]:w-[30px] max-[640px]:h-[30px]"
           />
-        )}
+        ) : <div className="w-10 h-10 bg-gray-300 rounded-full"></div>}
         <div className="md:flex hidden gap-6 items-center">
           <NavbarBtn name="Home" />
           <NavbarBtn name="About" />

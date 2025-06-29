@@ -1,9 +1,23 @@
+'use client'
 import UserArticles from '@/app/components/__molecules/userArticles/UserArticles'
 import UserIntro from '@/app/components/__molecules/userIntroSection/UserIntro'
-import React from 'react'
+import { getCookie } from 'cookies-next'
+import { useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
 
 export default function HomePage() {
+  const router = useRouter()
+  const token = getCookie('token')
+
+  if (!token) {
+    router.push('/login')
+    return null
+  }
+
+
+
   return (
+
     <div className='w-full max-w-[640px] mx-auto px-[9px]  '>
       <div className="border-[1px] border-[#EFEDEB] px-2.5 pt-12  min-h-[85vh] border-b-0 border-t-0">
         <UserIntro />

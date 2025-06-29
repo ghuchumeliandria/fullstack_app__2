@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { DM_Sans } from "next/font/google";
-import AuthGuard from "./components/__molecules/AuthGuard/AuthGuard";
+import Navbar from "./components/__organisms/navbar/Navbar";
+import Footer from "./components/__organisms/footer/Footer";
+import AuthGuard from "./components/__organisms/authGuard/AuthGuard";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,11 +35,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="bg-bgmain">
+    <html lang="en" className="bg-bgma">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${DMS.variable} antialiased bg-background text-foreground`}
       >
-        <AuthGuard>{children}</AuthGuard>
+        <div className="w-full">
+          <AuthGuard>
+
+            {children}
+          </AuthGuard>
+
+        </div>
       </body>
     </html>
   );
