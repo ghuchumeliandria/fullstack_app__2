@@ -23,7 +23,6 @@ export class AuthController {
     const token = await this.authService.signIn(signInDto);
 
     res.cookie('token', token, {
-      httpOnly: true,
       maxAge: 1 * 24 * 60 * 60 * 1000,
     });
 
