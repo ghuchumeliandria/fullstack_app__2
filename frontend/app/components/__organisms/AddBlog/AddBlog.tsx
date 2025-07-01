@@ -1,72 +1,90 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import TextLine from "../../__atoms/TextLine/TextLine";
+import { axiosInstance } from "@/app/api/axios.instance";
+import Articles from "../../__atoms/articles/Articles";
+import { BlogType } from "@/app/types/type";
 
 export default function AddBlog() {
-  const [posts, setPosts] = useState<any[]>([]);
+  const [posts, setPosts] = useState<BlogType[]>([]);
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
-  const [date, setDate] = useState("");
+
+  const fetchMyBlogs = async () => {
+    try {
+      const res = await axiosInstance.get("/blogs/me");
+      setPosts(res.data);
+    } catch (err) {
+      console.error("Failed to fetch user blogs:", err);
+    }
+  };
 
   useEffect(() => {
-    const saved = localStorage.getItem("posts");
-    if (saved) {
-      const parsedPosts = JSON.parse(saved);
-      setPosts(parsedPosts);
-    }
+    fetchMyBlogs();
   }, []);
 
-  const handleAdd = () => {
-    const newPost = {
-      title,
-      summary,
-      date: date || new Date().toDateString(),
-      id: new Date().getTime(),
-    };
-    const updated = [...posts, newPost];
-    setPosts(updated);
-    localStorage.setItem("posts", JSON.stringify(updated));
-    setTitle("");
-    setSummary("");
+  const handleAdd = async () => {
+    if (!title.trim()) return;
+
+    try {
+      await axiosInstance.post("/blogs", { title, summary });
+      setTitle("");
+      setSummary("");
+      fetchMyBlogs();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      await axiosInstance.delete(`/blogs/${id}`);
+      setPosts((prev) => prev.filter((p) => p._id !== id));
+    } catch (err) {
+      console.error("Failed to delete blog", err);
+    }
   };
 
   return (
-    <div className="space-y-4 w-full max-w-[640px] mx-auto px-[9px]   ">
-      <div className=" w-full border-[1px] border-t-0 border-b-0 min-h-[84vh] pt-8 px-2.5 pb-4 border-borderColor bg-background text-foreground">
-        <TextLine text="My Articles" />
+    <div className="space-y-4 w-full max-w-[640px] mx-auto px-[9px]">
+      <div className="w-full border border-borderColor bg-background text-foreground pt-8 px-2.5 pb-4">
+        <TextLine text="Write here" />
         <input
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-2 border border-borderColor rounded bg-background text-foreground my-3"
+          className="w-full p-2 border text-black rounded my-3"
         />
         <textarea
           placeholder="Summary"
           value={summary}
           onChange={(e) => setSummary(e.target.value)}
-          className="w-full p-2 border border-borderColor rounded bg-background text-foreground"
+          className="w-full p-2 border text-black rounded"
         />
         <button
           onClick={handleAdd}
-          className="bg-blue-500 text-white px-4 py-1 rounded"
+          className="bg-blue-500 text-white px-4 py-1 rounded mt-2"
         >
           Add Article
         </button>
 
         <div className="mt-6 space-y-4">
-        <TextLine text="All Articles" />
+          <TextLine text="My Articles" />
           {posts.length === 0 ? (
             <h1>No blog posts yet </h1>
           ) : (
-            posts.map((p, i) => (
-              <div
-                key={i}
-                className="border p-4 rounded bg-background text-foreground border-borderColor"
-              >
-                <h2 className="font-bold">{p.title}</h2>
-                <p className="italic text-sm">{p.date}</p>
-                <p className="break-words max-w-[300px]">{p.summary}</p>
-              </div>
+            posts.map((p) => (
+              <Articles
+                key={p._id}
+                id={p._id}
+                title={p.title}
+                summary={p.summary}
+                date={new Date(p.createdAt).toDateString()}
+                authorName={p.author?.fullName || "Unknown"}
+                showActions={true}
+                handleDelete={handleDelete}
+              />
             ))
           )}
         </div>

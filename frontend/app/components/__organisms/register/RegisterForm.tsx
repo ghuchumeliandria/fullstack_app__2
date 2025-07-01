@@ -8,7 +8,6 @@ import { signUpSchema, SignUpType } from "@/app/validation/sign-up.schema";
 import { axiosInstance } from "@/app/api/axios.instance";
 
 export default function RegisterForm() {
-
   const router = useRouter();
 
   const {
@@ -17,23 +16,24 @@ export default function RegisterForm() {
     setError,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(signUpSchema)
-  })
+    resolver: yupResolver(signUpSchema),
+  });
 
   const onSubmit = async ({ fullName, email, password }: SignUpType) => {
     try {
-      const resp = await axiosInstance.post('/auth/sign-up', {
+      const resp = await axiosInstance.post("/auth/sign-up", {
         fullName,
         email,
-        password
-      })
-      if (resp.status === 201) {
-        router.push('/login')
-        return
-      }
+        password,
+        userImage: "https://ui-avatars.com/api/?name=" + fullName,
+      });
 
+      if (resp.status === 201) {
+        router.push("/login");
+        return;
+      }
     } catch (error: any) {
-      if (error.response?.data?.message === 'user already exist') {
+      if (error.response?.data?.message === "user already exist") {
         setError("email", {
           type: "manual",
           message: "Email already exists",
@@ -47,9 +47,8 @@ export default function RegisterForm() {
       <div className="bg-zinc-900 p-8 rounded-lg shadow-md w-full max-w-sm space-y-4">
         <h1 className="text-3xl font-bold text-center mb-2">Register</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-
           <input
-            {...register('fullName')}
+            {...register("fullName")}
             type="text"
             id="fullName"
             placeholder="fullname"
@@ -60,7 +59,7 @@ export default function RegisterForm() {
             <p className="text-red-500 text-sm">{errors.fullName.message}</p>
           )}
           <input
-            {...register('email')}
+            {...register("email")}
             id="email"
             type="email"
             placeholder="email"
@@ -71,7 +70,7 @@ export default function RegisterForm() {
             <p className="text-red-500 text-sm">{errors.email.message}</p>
           )}
           <input
-            {...register('password')}
+            {...register("password")}
             id="password"
             type="password"
             placeholder="Password"
@@ -82,9 +81,7 @@ export default function RegisterForm() {
             <p className="text-red-500 text-sm">{errors.password.message}</p>
           )}
 
-          <button
-            className="w-full bg-green-600 hover:bg-green-500 text-white py-2 rounded font-medium"
-          >
+          <button className="w-full bg-green-600 hover:bg-green-500 text-white py-2 rounded font-medium">
             Register
           </button>
         </form>
@@ -98,4 +95,3 @@ export default function RegisterForm() {
     </div>
   );
 }
-

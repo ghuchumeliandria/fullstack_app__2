@@ -1,6 +1,11 @@
 export type BlogType = {
-    title: string,
-    date: string,
-    summary : string,
-    id: string
-  }
+  _id: string;
+
+  title: string;
+  summary: string;
+  createdAt: string;
+  author: {
+    _id: string;
+    fullName: string;
+  };
+};

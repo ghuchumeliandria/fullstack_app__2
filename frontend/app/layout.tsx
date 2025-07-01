@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { DM_Sans } from "next/font/google";
-import Navbar from "./components/__organisms/navbar/Navbar";
-import Footer from "./components/__organisms/footer/Footer";
 import AuthGuard from "./components/__organisms/authGuard/AuthGuard";
 
 const geistSans = localFont({
@@ -40,11 +38,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${DMS.variable} antialiased bg-background text-foreground`}
       >
         <div className="w-full">
-          <AuthGuard>
-
-            {children}
-          </AuthGuard>
-
+          <AuthGuard>{children}</AuthGuard>
         </div>
       </body>
     </html>

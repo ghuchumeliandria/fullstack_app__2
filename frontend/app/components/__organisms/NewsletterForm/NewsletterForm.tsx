@@ -21,15 +21,13 @@ export default function NewsletterForm() {
     <div className="bg-background p-6 rounded shadow-md w-full max-w-lg mx-auto text-foreground space-y-5">
       <h1 className="text-3xl font-bold">Newsletter</h1>
       <p>
-        Want to stay updated on my latest articles, coding tutorials, and
-        personal adventures? Sign up for my newsletter! It’s a simple way to
-        keep track of new posts and occasional coding tips I discover. Just drop
-        your email in the sign-up box, and I’ll send you updates whenever
-        there’s something new to share.
-      </p>
-      <p className="font-semibold">
-        I’d love to have you along for the ride and also hear about your own
-        journey!
+        Want to be the first to know when a new blog post drops? Subscribe
+        newsletter and receive instant alerts whenever someone publish fresh
+        content. Whether it's a coding deep-dive, a tech tip, or a personal
+        project — you’ll get notified right away. Plus, you’ll be able to like
+        and engage with the posts you enjoy most. Just drop your email below and
+        join the community of developers and curious minds who never miss an
+        update!
       </p>
 
       <input

@@ -1,57 +1,63 @@
 "use client";
-import { useEffect, useState } from "react";
-import TextLine from "../../__atoms/TextLine/TextLine";
 
-export default function AboutContent() {
-  const [about, setAbout] = useState("");
-  const [edit, setEdit] = useState(false);
+import { useEffect, useState } from "react";
+import { useAboutStore } from "@/app/store/useAboutStore";
+
+export default function AboutPage() {
+  const { content, setContent, loadAbout, updateAbout } = useAboutStore();
+  const [editing, setEditing] = useState(false);
+  const [input, setInput] = useState("");
 
   useEffect(() => {
-    const saved = localStorage.getItem("about");
-    if (saved) setAbout(saved);
+    loadAbout();
   }, []);
 
-  const handleSave = () => {
-    localStorage.setItem("about", about);
-    setEdit(false);
+  useEffect(() => {
+    setInput(content);
+  }, [content]);
+
+  const handleSave = async () => {
+    try {
+      await updateAbout(input);
+      setEditing(false);
+    } catch (err) {
+      console.error("Failed to update about:", err);
+    }
   };
 
   return (
-    <div className="space-y-4 ">
-      <div className="w-full min-h-[84vh] px-2.5 border-[1px] flex justify-center items-center flex-col border-y-0 border-borderColor bg-background text-foreground">
-        <TextLine text="About Us" />
-        {edit ? (
-          <>
-            <textarea
-              value={about}
-              onChange={(e) => setAbout(e.target.value)}
-              className="w-full p-2 border rounded text-black"
-              rows={8}
-            />
+    <div className="max-w-[640px] mx-auto px-4 py-16 text-center">
+      <h1 className="text-2xl font-bold mb-4 border-b border-blue-300 inline-block pb-1">
+        About Us
+      </h1>
 
-            <button
-              onClick={handleSave}
-              className="bg-green-600 text-white w-[100px] mx-auto mt-2 px-4 py-1 rounded"
-            >
-              Save
-            </button>
-          </>
-        ) : (
-          <>
-            <div className="max-w-[360px] rounded-xl p-4 mx-auto shadow bg-background border border-borderColor">
-              <p className="whitespace-pre-line">
-                {about || "No about text yet."}
-              </p>
-            </div>
-            <button
-              onClick={() => setEdit(true)}
-              className="bg-blue-500 text-white w-[100px] mx-auto mt-2 px-4 py-1 rounded"
-            >
-              Edit
-            </button>
-          </>
-        )}
-      </div>
+      {editing ? (
+        <div className="space-y-4 mt-4">
+          <textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            className="w-full border border-gray-300 p-3 rounded bg-background text-foreground min-h-[120px]"
+          />
+          <button
+            onClick={handleSave}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+          >
+            Save
+          </button>
+        </div>
+      ) : (
+        <div className="space-y-4 mt-4">
+          <p className="text-[17px] text-foreground">
+            {content || "No content yet."}
+          </p>
+          <button
+            onClick={() => setEditing(true)}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+          >
+            Edit
+          </button>
+        </div>
+      )}
     </div>
   );
 }

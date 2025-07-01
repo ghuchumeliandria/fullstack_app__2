@@ -1,39 +1,35 @@
-import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from "@nestjs/common";
-import { JwtService } from "@nestjs/jwt";
-import { Observable } from "rxjs";
+import {
+  CanActivate,
+  ExecutionContext,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { Observable } from 'rxjs';
 
 @Injectable()
-export class IsAuthGuard implements CanActivate{
+export class IsAuthGuard implements CanActivate {
+  constructor(private jwtService: JwtService) {}
 
-    constructor(
-        private jwtService : JwtService
-    ){}
+  canActivate(
+    context: ExecutionContext,
+  ): boolean | Promise<boolean> | Observable<boolean> {
+    const req = context.switchToHttp().getRequest();
 
-    canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
-        const req = context.switchToHttp().getRequest()
-        const token = this.getTokenFromHeaders(req.headers)
-        if(!token) {
-            return false
-        }
-
-        try {
-            const payload =  this.jwtService.verify(token , {secret : process.env.JWT_SECRET})
-            
-            req.userId = payload.id
-        } catch (error) {
-            throw new UnauthorizedException("token expired raundaaa")
-        }
-
-        return true
+    const token = req.cookies?.token; 
+    if (!token) {
+      throw new UnauthorizedException('No token found in cookies');
     }
 
-    getTokenFromHeaders(headers){
-        const authorization = headers["authorization"]
+    try {
+      const payload = this.jwtService.verify(token, {
+        secret: process.env.JWT_SECRET,
+      });
 
-        if(!authorization) return null
-
-        const [type , token] = authorization.split(" ")
-
-        return type === "Bearer" ? token : null
+      req.userId = payload.id;
+      return true;
+    } catch (error) {
+      throw new UnauthorizedException('Invalid or expired token');
     }
+  }
 }

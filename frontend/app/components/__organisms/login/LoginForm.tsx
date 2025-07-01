@@ -1,40 +1,41 @@
 "use client";
-import { useState, useEffect } from "react";
+
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/app/store/userStore";
-import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signInSchema, SignInType } from "@/app/validation/sign-in.schema";
 import { axiosInstance } from "@/app/api/axios.instance";
-import { setCookie } from "cookies-next";
+
 export default function LoginForm() {
   const router = useRouter();
+  const { setUser } = useUserStore();
 
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(signInSchema)
-  })
+  } = useForm<SignInType>({
+    resolver: yupResolver(signInSchema),
+  });
 
-  const handleLogin = async ({ email, password }: SignInType) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async (data: SignInType) => {
     try {
-      const resp = await axiosInstance.post('/auth/sign-in', {
-        email,
-        password
-      })
+      setLoading(true);
+      const res = await axiosInstance.post("/auth/sign-in", data);
 
-      if (resp.status === 201) {
-        console.log("warmatebit daloginda")
-        setCookie('token', resp.data.token, { maxAge: 1 * 60 })
-        router.push("/");
-        return
+      if (res.status === 200 || res.status === 201) {
+        setTimeout(() => {
+          router.replace("/");
+        }, 0);
       }
-    } catch (error) {
-
+    } catch (err) {
+      console.error("Login failed", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -42,10 +43,12 @@ export default function LoginForm() {
     <div className="min-h-screen flex items-center justify-center bg-black text-white">
       <div className="bg-zinc-900 p-8 rounded-lg shadow-md w-full max-w-sm space-y-4">
         <h1 className="text-3xl font-bold text-center mb-2">Login</h1>
-        <form onSubmit={handleSubmit(handleLogin)} className="flex flex-col gap-3">
-
+        <form
+          onSubmit={handleSubmit(handleLogin)}
+          className="flex flex-col gap-3"
+        >
           <input
-            {...register('email')}
+            {...register("email")}
             type="email"
             placeholder="Email"
             className="w-full px-3 py-2 border border-gray-600 bg-zinc-800 rounded"
@@ -54,7 +57,7 @@ export default function LoginForm() {
             <p className="text-red-500 text-sm">{errors.email.message}</p>
           )}
           <input
-          {...register('password')}
+            {...register("password")}
             type="password"
             placeholder="Password"
             className="w-full px-3 py-2 border border-gray-600 bg-zinc-800 rounded"
@@ -62,18 +65,13 @@ export default function LoginForm() {
           {errors.password && (
             <p className="text-red-500 text-sm">{errors.password.message}</p>
           )}
-
-          <button className="w-full bg-blue-600 hover:bg-blue-500 text-white py-2 rounded font-medium"
+          <button
+            className="w-full bg-blue-600 hover:bg-blue-500 text-white py-2 rounded font-medium"
+            disabled={loading}
           >
-            Log In
+            {loading ? "Logging in..." : "Log In"}
           </button>
         </form>
-        <p className="text-sm text-center">
-          Don’t have an account?{" "}
-          <Link href="/register" className="text-blue-400 hover:underline">
-            Register
-          </Link>
-        </p>
       </div>
     </div>
   );
