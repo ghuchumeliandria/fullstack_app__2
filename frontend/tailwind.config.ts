@@ -18,6 +18,7 @@ const config: Config = {
       fontFamily: {
         DM_Sans: "var(--font_DM_Sans)",
       },
+          
     },
   },
   plugins: [],

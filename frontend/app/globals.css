@@ -6,14 +6,14 @@
   --background: #ffffff;
   --foreground: #1a1a1a;
   --bgmain: #fbfbf7;
-  --borderColor: #efedeb;
+  --borderColor: #EFEDEB;
 }
 
 .dark {
   --background: #0f0f0f;
   --foreground: #f4f4f4;
   --bgmain: #1a1a1a;
-  --borderColor: #3a3a3a;
+  --borderColor: #efedeb;
 }
 
 * {

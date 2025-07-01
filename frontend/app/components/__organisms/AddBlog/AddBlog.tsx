@@ -48,7 +48,7 @@ export default function AddBlog() {
 
   return (
     <div className="space-y-4 w-full max-w-[640px] mx-auto px-[9px]">
-      <div className="w-full border border-borderColor bg-background text-foreground pt-8 px-2.5 pb-4">
+      <div className="w-full border-l-[1px] border-r-[1px] border-borderColor min-h-[82vh] bg-background text-foreground pt-8 px-2.5 pb-4">
         <TextLine text="Write here" />
         <input
           placeholder="Title"

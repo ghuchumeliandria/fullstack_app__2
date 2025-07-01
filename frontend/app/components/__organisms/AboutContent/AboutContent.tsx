@@ -26,8 +26,8 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="max-w-[640px] mx-auto px-4 py-16 text-center">
-      <h1 className="text-2xl font-bold mb-4 border-b border-blue-300 inline-block pb-1">
+    <div className="max-w-[640px] mx-auto px-4 py-16 text-center min-h-[82vh] border-x-[1px] border-borderColor">
+      <h1 className="text-2xl font-bold mb-4 border-b border-blue-300   inline-block pb-1">
         About Us
       </h1>
 

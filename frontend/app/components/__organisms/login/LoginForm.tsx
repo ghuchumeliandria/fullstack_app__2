@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signInSchema, SignInType } from "@/app/validation/sign-in.schema";
 import { axiosInstance } from "@/app/api/axios.instance";
+import Link from "next/link";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -72,6 +73,8 @@ export default function LoginForm() {
             {loading ? "Logging in..." : "Log In"}
           </button>
         </form>
+        <div className="flex gap-3"><p>Don't have an account?</p>
+          <Link href={'/register'} className="text-cyan-700 hover:text-cyan-500">Sign up</Link> </div>
       </div>
     </div>
   );

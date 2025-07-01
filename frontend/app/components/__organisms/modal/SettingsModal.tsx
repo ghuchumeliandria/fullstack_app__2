@@ -5,6 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { axiosInstance } from "@/app/api/axios.instance";
+import { deleteCookie } from "cookies-next";
 
 export default function SettingsModal({ onClose }: { onClose: () => void }) {
   const router = useRouter();
@@ -45,6 +46,9 @@ export default function SettingsModal({ onClose }: { onClose: () => void }) {
   };
 
   const handleLogout = () => {
+
+    deleteCookie('token')
+
     router.push("/login");
   };
 
