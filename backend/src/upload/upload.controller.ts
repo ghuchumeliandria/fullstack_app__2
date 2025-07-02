@@ -21,6 +21,7 @@ export class UploadController {
 
     try {
       const result = await new Promise((resolve, reject) => {
+        console.log(file , "ფილეეეეეეეეეეედსადს")
         const uploadStream = cloudinary.uploader.upload_stream(
           { resource_type: 'image' },
           (error, result) => {
@@ -28,10 +29,10 @@ export class UploadController {
               console.error('Cloudinary Error:', error);
               return reject(new InternalServerErrorException('Upload failed'));
             }
+            console.log(result , 'resuultt')
             resolve(result);
           },
         );
-
         uploadStream.end(file.buffer);
       });
 
