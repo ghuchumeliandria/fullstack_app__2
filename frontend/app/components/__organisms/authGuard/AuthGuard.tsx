@@ -12,7 +12,7 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
     const isAuthPage = pathname === "/login" || pathname === "/register";
     const [authorized, setAuthorized] = useState(false);
     const [loading, setLoading] = useState(true);
-
+    
     useEffect(() => {
         const token = getCookie('token')
         if (token && isAuthPage) {
