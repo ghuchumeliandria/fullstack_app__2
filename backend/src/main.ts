@@ -32,7 +32,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: ['https://fullstack-app-2-vq...vercel.app'], 
+    origin: process.env.FRONT_URL, 
     credentials: true,
   });
 
