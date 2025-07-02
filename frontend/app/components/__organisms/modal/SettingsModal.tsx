@@ -21,7 +21,7 @@ export default function SettingsModal({ onClose }: { onClose: () => void }) {
       if (imageFile) {
         const formData = new FormData();
         formData.append("file", imageFile);
-
+        console.log(formData)
         const res = await axiosInstance.post("/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data",

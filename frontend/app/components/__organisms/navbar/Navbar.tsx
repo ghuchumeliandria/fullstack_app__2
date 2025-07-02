@@ -20,7 +20,7 @@ export default function Navbar() {
             alt="profile"
             width={40}
             height={40}
-            className="rounded-[10px] max-[640px]:w-[30px] max-[640px]:h-[30px]"
+            className="rounded-full w-10 h-10 max-[640px]:w-[30px] object-cover max-[640px]:h-[30px]"
           />
         ) : (
           <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
